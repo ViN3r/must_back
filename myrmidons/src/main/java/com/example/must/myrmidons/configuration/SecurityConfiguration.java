@@ -9,19 +9,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SecurityConfiguration {
 
-    @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-          http
-                  .authorizeHttpRequests((requests) -> requests
-                          .anyRequest().permitAll())
-                  .httpBasic(withDefaults());
-      return http.build();
+  @Bean
+  public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    http
+        .authorizeHttpRequests((requests) -> requests
+            .requestMatchers("/authentification").permitAll()
+            .anyRequest().authenticated())
+        .httpBasic();
+    return http.build();
   }
 
 }

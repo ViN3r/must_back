@@ -1,0 +1,1 @@
+insert into Utilisateur VALUES (DEFAULT, 'admin@myrmidons.fr', 'adminMyrmidons');
