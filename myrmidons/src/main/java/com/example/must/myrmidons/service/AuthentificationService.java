@@ -1,5 +1,7 @@
 package com.example.must.myrmidons.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.must.myrmidons.domain.Utilisateur;
@@ -10,14 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class AuthentificationService {
-    
+
     private final UtilisateurRepository utilisateurRepository;
 
-    public AuthentificationService( UtilisateurRepository utilisateurRepository) {
+    public AuthentificationService(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
     }
-    
-    public boolean authentification(String email, String motDePasse) {
-        return utilisateurRepository.findByEmailAndPassword(email, motDePasse).isPresent(); 
+
+    public Optional<Utilisateur> authentification(String email, String motDePasse) {
+        return utilisateurRepository.findByEmailAndMdp(email, motDePasse);
     }
 }

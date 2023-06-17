@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity(name = "Utilisateur")
 public class Utilisateur {
-    
-    @Id 
-    private int   id;
-    private String  email;
-    private String password;
+
+    @Id
+    private int id;
+    private String email;
+    private String mdp;
 }

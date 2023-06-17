@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.must.myrmidons.domain.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
-    
-    Optional<Utilisateur> findByEmailAndPassword(String email, String password);
+
+    Optional<Utilisateur> findByEmailAndMdp(String email, String password);
 }

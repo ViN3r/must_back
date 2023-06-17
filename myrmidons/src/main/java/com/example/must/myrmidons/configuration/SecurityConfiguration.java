@@ -19,8 +19,10 @@ public class SecurityConfiguration {
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/authentification").permitAll()
-            .anyRequest().authenticated())
+            .requestMatchers("/api/authentification**").permitAll()
+            .requestMatchers("/swagger-ui/**").permitAll()
+            .requestMatchers("/v3/**").permitAll()
+            .requestMatchers("/api/**").authenticated())
         .httpBasic();
     return http.build();
   }
