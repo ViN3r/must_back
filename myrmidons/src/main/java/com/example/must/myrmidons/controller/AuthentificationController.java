@@ -28,7 +28,6 @@ public class AuthentificationController {
     }
 
     @GetMapping("/api/authentification")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity authentification(@RequestParam("email") String email,
             @RequestParam("password") String password) {
         log.info("AuthentificationController en cours");
