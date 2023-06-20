@@ -16,7 +16,7 @@ import com.example.must.myrmidons.service.AuthentificationService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 @Slf4j
 public class AuthentificationController {
 
@@ -27,7 +27,7 @@ public class AuthentificationController {
         this.authentificationService = authentificationService;
     }
 
-    @GetMapping("/api/authentification")
+    @GetMapping("/authentification")
     public ResponseEntity authentification(@RequestParam("email") String email,
             @RequestParam("password") String password) {
         log.info("AuthentificationController en cours");
