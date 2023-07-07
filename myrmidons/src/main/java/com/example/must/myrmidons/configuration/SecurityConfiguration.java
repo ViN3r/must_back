@@ -49,6 +49,7 @@ public class SecurityConfiguration {
             .requestMatchers("/api/authentification").permitAll()
             .requestMatchers("/swagger-ui/**").permitAll()
             .requestMatchers("/v3/**").permitAll()
+            .requestMatchers("/api/referentiel/**").permitAll()
             .anyRequest().authenticated())
         .httpBasic();
     return http.build();
