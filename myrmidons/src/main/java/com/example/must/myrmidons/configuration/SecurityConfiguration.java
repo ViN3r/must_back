@@ -51,6 +51,7 @@ public class SecurityConfiguration {
             .requestMatchers("/v3/**").permitAll()
             .requestMatchers("/api/referentiel/**").permitAll()
             .anyRequest().authenticated())
+        .csrf().disable()
         .httpBasic();
     return http.build();
   }
