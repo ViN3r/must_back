@@ -1,7 +1,5 @@
 package com.example.must.myrmidons.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/api/referentiel")
-@Slf4j
 public class ReferentielController {
 
     @GetMapping("/section")
@@ -25,13 +22,11 @@ public class ReferentielController {
 
     @GetMapping("/categorie")
     public ResponseEntity<Categorie[]> getCategorie() {
-        log.info("{}", Categorie.values());
         return ResponseEntity.ok(Categorie.values());
     }
 
     @GetMapping("/type")
     public ResponseEntity<TypeMembre[]> getType() {
-        log.info("{}", TypeMembre.values());
         return ResponseEntity.ok(TypeMembre.values());
     }
 }

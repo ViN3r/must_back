@@ -33,7 +33,6 @@ public class MembreController {
     }
 
     @GetMapping()
-
     public Collection<MembreDto> getMembres() {
         return membreService.getListMembreDto();
     }
