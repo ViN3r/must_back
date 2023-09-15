@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.must.myrmidons.dto.MembreDto;
+import com.example.must.myrmidons.dto.SearchMembreDto;
 import com.example.must.myrmidons.enumModel.Section;
 import com.example.must.myrmidons.service.MembreService;
 
@@ -17,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/api/membres")
-@Slf4j
 public class MembreController {
 
     private final MembreService membreService;
@@ -28,12 +29,15 @@ public class MembreController {
 
     @PostMapping(consumes = { "application/json" })
     public MembreDto ajoutMembre(@RequestBody final MembreDto membre) {
-        log.info("Ajout d'un nouveau membre");
         return membreService.saveOrUpdateMembre(membre);
     }
 
     @GetMapping()
-    public Collection<MembreDto> getMembres() {
-        return membreService.getListMembreDto();
+    public ResponseEntity<SearchMembreDto> getMembres(
+            @RequestParam(name = "search", required = false) String search,
+            @RequestParam(required = false) String limit,
+            @RequestParam int pageIndex,
+            @RequestParam int pageSize) {
+        return ResponseEntity.ok(membreService.search(pageIndex, pageSize));
     }
 }

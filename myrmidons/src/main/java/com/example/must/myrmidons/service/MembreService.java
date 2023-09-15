@@ -1,14 +1,20 @@
 package com.example.must.myrmidons.service;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.must.myrmidons.domain.Membre;
 import com.example.must.myrmidons.dto.MembreDto;
+import com.example.must.myrmidons.dto.SearchMembreDto;
 import com.example.must.myrmidons.mapper.MembreMapper;
 import com.example.must.myrmidons.repository.MembreRepository;
 
@@ -25,11 +31,10 @@ public class MembreService {
     }
 
     public MembreDto saveOrUpdateMembre(MembreDto membreDto) {
-        log.info("Dans service saveOrUpdateMembre");
         if (Objects.isNull(membreDto.getId())) {
             Optional<Membre> membre = membreRepository.findByNom(membreDto.getNom());
             if (membre.isPresent()) {
-                log.error("Membre existe déjà");
+                //TODO Modification d'un membre
                 return null;
             }
         }
@@ -41,5 +46,19 @@ public class MembreService {
 
     public List<MembreDto> getListMembreDto() {
         return MembreMapper.INSTANCE.map(this.membreRepository.findAll());
+    }
+
+    public SearchMembreDto search(int pageIndex, int pageSize) {
+        final Pageable page = PageRequest.of(pageIndex, pageSize);
+        Page<Membre> pageMembre = null;
+        Specification<Membre> spec = null;
+
+        if (Objects.isNull(spec)) {
+            pageMembre = this.membreRepository.findAll(page);
+        } else {
+            log.info("Pas encore fait");
+        }
+        return SearchMembreDto.builder().data(MembreMapper.INSTANCE.map(pageMembre.getContent()))
+                .totalElement(pageMembre.getTotalElements()).currentPage(pageIndex).build();
     }
 }
